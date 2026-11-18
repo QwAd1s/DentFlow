@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DentFlow AI — Панель управления</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">D</div>
+            <div>
+                <h2>DentFlow <span>AI</span></h2>
+                <small>Dental management</small>
+            </div>
+        </div>
+
+        <div class="clinic-info">
+            <div class="clinic-avatar">DC</div>
+            <div>
+                <strong>Dental Clinic</strong>
+                <small>Грозный</small>
+            </div>
+        </div>
+
+        <nav>
+            <p class="nav-title">МЕНЮ</p>
+
+            <button class="nav-item active" data-page="dashboard">
+                <span>▦</span> Главная
+            </button>
+
+            <button class="nav-item" data-page="appointments">
+                <span>▣</span> Записи
+            </button>
+
+            <button class="nav-item" data-page="patients">
+                <span>♙</span> Пациенты
+            </button>
+
+            <button class="nav-item" data-page="doctors">
+                <span>⚕</span> Врачи
+            </button>
+
+            <button class="nav-item" data-page="messages">
+                <span>✉</span> Сообщения
+                <span class="notification">3</span>
+            </button>
+
+            <p class="nav-title settings-title">УПРАВЛЕНИЕ</p>
+
+            <button class="nav-item" data-page="services">
+                <span>◇</span> Услуги и цены
+            </button>
+
+            <button class="nav-item" data-page="analytics">
+                <span>▤</span> Аналитика
+            </button>
+
+            <button class="nav-item" data-page="ai">
+                <span>✧</span> Настройки ИИ
+            </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="user-profile">
+                <div class="user-avatar">А</div>
+                <div>
+                    <strong>Администратор</strong>
+                    <small>Главный аккаунт</small>
+                </div>
+                <span>⋯</span>
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <header class="topbar">
+            <div>
+                <div class="breadcrumb">DentFlow AI / <span id="breadcrumb">Главная</span></div>
+                <h1 id="page-title">Главная</h1>
+            </div>
+
+            <div class="top-actions">
+                <button class="icon-button">♧</button>
+                <div class="top-user">А</div>
+            </div>
+        </header>
+
+
+        <!-- DASHBOARD -->
+        <section class="page active" id="dashboard">
+
+            <div class="welcome">
+                <div>
+                    <h2>Добрый день!</h2>
+                    <p>Вот что происходит в вашей клинике сегодня.</p>
+                </div>
+
+                <button class="primary-btn" onclick="openModal()">
+                    + Новая запись
+                </button>
+            </div>
+
+
+            <!-- STATISTICS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Всего пациентов</span>
+                        <div class="stat-icon blue">♙</div>
+                    </div>
+                    <h2>1 284</h2>
+                    <small class="positive">↑ 12% за месяц</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Записи сегодня</span>
+                        <div class="stat-icon purple">▣</div>
+                    </div>
+                    <h2 id="appointments-count">18</h2>
+                    <small class="positive">↑ 8% за неделю</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Новые обращения</span>
+                        <div class="stat-icon orange">✉</div>
+                    </div>
+                    <h2>32</h2>
+                    <small class="positive">↑ 15% за неделю</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Обработано ИИ</span>
+                        <div class="stat-icon green">✧</div>
+                    </div>
+                    <h2>87%</h2>
+                    <small class="positive">↑ 5% за неделю</small>
+                </div>
+
+            </div>
+
+
+            <!-- CONTENT GRID -->
+            <div class="content-grid">
+
+                <div class="panel appointments-panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <h3>Ближайшие записи</h3>
+                            <p>Расписание приёмов на сегодня</p>
+                        </div>
+
+                        <button class="text-btn" onclick="showPage('appointments')">
+                            Все записи →
+                        </button>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Пациент</th>
+                                    <th>Врач</th>
+                                    <th>Время</th>
+                                    <th>Услуга</th>
+                                    <th>Статус</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="appointments-table">
+
+                                <tr>
+                                    <td>
+                                        <div class="patient-cell">
+                                            <div class="patient-avatar">АМ</div>
+                                            <strong>Али Магомедов</strong>
+                                        </div>
+                                    </td>
+                                    <td>И. Ахмадов</td>
+                                    <td>09:00</td>
+                                    <td>Лечение кариеса</td>
+                                    <td><span class="badge success">Подтверждено</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="patient-cell">
+                                            <div class="patient-avatar">ХА</div>
+                                            <strong>Хеда Алиева</strong>
+                                        </div>
+                                    </td>
+                                    <td>М. Умарова</td>
+                                    <td>10:30</td>
+                                    <td>Консультация</td>
+                                    <td><span class="badge warning">Ожидает</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="patient-cell">
+                                            <div class="patient-avatar">МХ</div>
+                                            <strong>Муса Хасанов</strong>
+                                        </div>
+                                    </td>
+                                    <td>А. Сулейманов</td>
+                                    <td>12:00</td>
+                                    <td>Удаление зуба</td>
+                                    <td><span class="badge success">Подтверждено</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                <div class="patient-cell">
+                                            <div class="patient-avatar">ЗМ</div>
+                                            <strong>Зарема Мусаева</strong>
+                                        </div>
+                                    </td>
+                                    <td>И. Ахмадов</td>
+                                    <td>14:00</td>
+                                    <td>Чистка зубов</td>
+                                    <td><span class="badge success">Подтверждено</span></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+                <!-- RIGHT PANEL -->
+                <div class="right-column">
+
+                    <div class="panel ai-panel">
+                        <div class="ai-heading">
+                            <div class="ai-logo">✧</div>
+                            <div>
+                                <h3>AI Assistant</h3>
+                                <small><span class="online-dot"></span> Система активна</small>
+                            </div>
+                        </div>
+
+                        <div class="ai-stat">
+                            <span>Обработано обращений</span>
+                            <strong>124</strong>
+                        </div>
+
+                        <div class="ai-stat">
+                            <span>Автоматические ответы</span>
+                            <strong>108</strong>
+                        </div>
+
+                        <div class="ai-stat">
+                            <span>Передано администратору</span>
+                            <strong>16</strong>
+                        </div>
+
+                        <div class="ai-footer">
+                            ИИ работает в штатном режиме
+                        </div>
+                    </div>
+
+
+                    <div class="panel channels-panel">
+                        <h3>Каналы обращений</h3>
+                        <p>Откуда приходят пациенты</p>
+
+                        <div class="channel">
+                            <div class="channel-info">
+                                <span class="channel-icon instagram">◎</span>
+                                <span>Instagram</span>
+                            </div>
+                            <strong>68%</strong>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-fill instagram-fill"></div>
+                        </div>
+
+                        <div class="channel">
+                            <div class="channel-info">
+                                <span class="channel-icon whatsapp">◉</span>
+                                <span>WhatsApp</span>
+                            </div>
+                            <strong>32%</strong>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-fill whatsapp-fill"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- OTHER PAGES -->
+        <section class="page" id="appointments">
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h3>Расписание приёмов</h3>
+                        <p>Управление записями пациентов</p>
+                    </div>
+                    <button class="primary-btn" onclick="openModal()">+ Новая запись</button>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Пациент</th>
+                                <th>Врач</th>
+                                <th>Время</th>
+                                <th>Услуга</th>
+                                <th>Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody id="appointments-table-2"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="page" id="patients">
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h3>Пациенты</h3>
+                        <p>База клиентов клиники</p>
+                    </div>
+                    <input class="search" id="patient-search" placeholder="Поиск пациента...">
+                </div>
+
+                <div class="empty-state">
+                    <div>♙</div>
+                    <h3>База пациентов</h3>
+                    <p>Здесь будут отображаться зарегистрированные пациенты.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="page" id="doctors">
+            <div class="panel">
+                <h3>Врачи клиники</h3>
+                <p>Управление персоналом и специализациями</p>
+
+                <div class="doctors-grid">
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">ИА</div>
+                        <h3>Ибрагим Ахмадов</h3>
+                        <p>Стоматолог-терапевт</p>
+                        <span class="badge success">Работает</span>
+                    </div>
+
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">МУ</div>
+                        <h3>Мадина Умарова</h3>
+                        <p>Стоматолог-ортодонт</p>
+                        <span class="badge success">Работает</span>
+                    </div>
+
+                    <div class="doctor-card">
+                        <div class="doctor-avatar">АС</div>
+                        <h3>Адам Сулейманов</h3>
+                        <p>Стоматолог-хирург</p>
+                        <span class="badge success">Работает</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="page" id="messages">
+            <div class="panel">
+                <h3>Сообщения</h3>
+                <p>Единый центр общения с пациентами</p>
+
+                <div class="empty-state">
+                    <div>✉</div>
+                    <h3>Центр сообщений</h3>
+                    <p>Здесь будут отображаться переписки из Instagram и WhatsApp.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="page" id="services">
+            <div class="panel">
+                <h3>Услуги и цены</h3>
+                <p>Справочник услуг стоматологической клиники</p>
+
+                <div class="service-list">
+                    <div><span>Лечение кариеса</span><strong>от 3 000 ₽</strong></div>
+                    <div><span>Профессиональная чистка</span><strong>от 4 000 ₽</strong></div>
+                    <div><span>Удаление зуба</span><strong>от 2 500 ₽</strong></div>
+                    <div><span>Консультация</span><strong>от 1 000 ₽</strong></div>
+                    <div><span>Установка импланта</span><strong>от 25 000 ₽</strong></div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="page" id="analytics">
+            <div class="panel">
+                <h3>Аналитика</h3>
+                <p>Статистика эффективности клиники</p>
+                <div class="empty-state">
+                    <div>▤</div>
+                    <h3>Аналитика обращений</h3>
+                    <p>Здесь будут отображаться графики и показатели эффективности.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="page" id="ai">
+            <div class="panel">
+                <h3>Настройки AI Assistant</h3>
+                <p>Управление поведением интеллектуального администратора</p>
+
+                <div class="settings-row">
+                    <div>
+                        <strong>Автоматическая обработка обращений</strong>
+                        <p>ИИ отвечает на типовые вопросы пациентов.</p>
+                    </div>
+                         <input type="checkbox" checked>
+                </div>
+
+                <div class="settings-row">
+                    <div>
+                        <strong>Сбор заявок</strong>
+                        <p>ИИ собирает контактные данные и пожелания пациентов.</p>
+                    </div>
+                    <input type="checkbox" checked>
+                </div>
+
+                <div class="settings-row">
+                    <div>
+                        <strong>Передача администратору</strong>
+                        <p>Сложные вопросы передаются сотруднику клиники.</p>
+                    </div>
+                    <input type="checkbox" checked>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- NEW APPOINTMENT MODAL -->
+<div class="modal-overlay" id="appointment-modal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+            <h2>Новая запись</h2>
+            <button class="close-btn" onclick="closeModal()">×</button>
+        </div>
+
+        <form id="appointment-form">
+
+            <label>ФИО пациента</label>
+            <input type="text" id="patient-name" placeholder="Введите имя пациента" required>
+
+            <label>Врач</label>
+            <select id="doctor-name" required>
+                <option value="">Выберите врача</option>
+                <option>И. Ахмадов</option>
+                <option>М. Умарова</option>
+                <option>А. Сулейманов</option>
+            </select>
+
+            <label>Услуга</label>
+            <select id="service-name" required>
+                <option value="">Выберите услугу</option>
+                <option>Лечение кариеса</option>
+                <option>Консультация</option>
+                <option>Удаление зуба</option>
+                <option>Чистка зубов</option>
+            </select>
+
+            <label>Дата</label>
+            <input type="date" id="appointment-date" required>
+
+            <label>Время</label>
+            <input type="time" id="appointment-time" required>
+
+            <button type="submit" class="primary-btn submit-btn">
+                Создать запись
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="java.js"></script>
+
+</body>
+</html>
